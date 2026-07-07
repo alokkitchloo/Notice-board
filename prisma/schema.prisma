@@ -1,0 +1,40 @@
+// Prisma schema for the Notice Board assignment.
+// Uses MySQL — compatible with TiDB Cloud's free tier (recommended in the assignment).
+// If you use Neon/Supabase (Postgres) instead, change provider to "postgresql"
+// below; no other changes are required since we don't use MySQL-only features.
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+enum Category {
+  EXAM
+  EVENT
+  GENERAL
+}
+
+enum Priority {
+  NORMAL
+  URGENT
+}
+
+model Notice {
+  id          Int      @id @default(autoincrement())
+  title       String
+  body        String   @db.Text
+  category    Category @default(GENERAL)
+  priority    Priority @default(NORMAL)
+  publishDate DateTime
+  // Bonus field. Implemented as an image URL rather than a file upload —
+  // this is a deliberate call on an unspecified requirement (see README):
+  // it avoids needing separate cloud storage (S3 etc.) just to satisfy a
+  // bonus item, while still letting a notice display an image.
+  image       String?  @db.Text
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
