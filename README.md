@@ -2,7 +2,7 @@
 
 A full CRUD Notice Board built with Next.js (Pages Router), Prisma, and a hosted MySQL database, for the Reno Platforms Web Development Assignment.
 
-Live app:
+Live app:https://notice-board-snowy.vercel.app/
 Repository: https://github.com/alokkitchloo/Notice-board
 
 ## Features
